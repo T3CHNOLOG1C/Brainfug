@@ -61,9 +61,9 @@ class bf:
             codeptr += 1
             loops += 1
 
-        await self.bot.send("{}: {}".format(self.bot.escape_name(ctx.message.author.name), output))
+        await ctx.send("{}: {}".format(self.bot.escape_name(ctx.message.author.name), output))
         if loops == 50000:
-            await self.bot.send("note: capped at 50,000 loops")
+            await ctx.send("note: capped at 50,000 loops")
 
 def setup(bot):
     bot.add_cog(bf(bot))
