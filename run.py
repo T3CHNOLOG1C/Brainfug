@@ -50,30 +50,6 @@ def escape_name(name):
 
 bot.escape_name = escape_name
 
-bot.pruning = False  # used to disable leave logs if pruning, maybe.
-
-
-# mostly taken from https://github.com/Rapptz/discord.py/blob/async/discord/ext/commands/bot.py
-@bot.event
-async def on_command_error(error, ctx):
-    if isinstance(error, commands.errors.CommandNotFound):
-
-    elif isinstance(error, commands.errors.MissingRequiredArgument):
-        formatter = commands.formatter.HelpFormatter()
-        await bot.send_message(ctx.message.channel, "{} You are missing required arguments.\n{}".format(ctx.message.author.mention, formatter.format_help_for(ctx, ctx.command)[0]))
-
-    elif isinstance(error, commands.errors.CommandOnCooldown):
-        try:
-            await bot.delete_message(ctx.message)
-        except discord.errors.NotFound:
-            pass
-        message = await bot.send_message(ctx.message.channel, "{} This command was used {:.2f}s ago and is on cooldown. Try again in {:.2f}s.".format(ctx.message.author.mention, error.cooldown.per - error.retry_after, error.retry_after))
-        await asyncio.sleep(10)
-        await bot.delete_message(message)
-
-    else:
-      pass
-
 bot.all_ready = False
 bot._is_all_ready = asyncio.Event(loop=bot.loop)
 async def wait_until_all_ready():
