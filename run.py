@@ -65,12 +65,12 @@ async def on_command_error(error, ctx):
 @bot.event
 async def on_ready():
     # this bot should only ever be in one server anyway
-    for server in bot.servers:
-        bot.guild = server
+    for guild in bot.guilds:
+        bot.guild = guild
         if bot.all_ready:
             break
 
-        print("{} has started! {} has {:,} members!".format(bot.user.name, server.name, server.member_count))
+        print("{} has started! {} has {:,} members!".format(bot.user.name, guild.name, guild.member_count))
 
 
         bot.all_ready = True
