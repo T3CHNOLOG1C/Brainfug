@@ -58,11 +58,6 @@ async def wait_until_all_ready():
 bot.wait_until_all_ready = wait_until_all_ready
 
 @bot.event
-async def on_command_error(error, ctx):
-    if isinstance(error, commands.errors.CommandNotFound):
-        pass  # ...don't need to know if commands don't exist
-
-@bot.event
 async def on_ready():
     # this bot should only ever be in one server anyway
     for guild in bot.guilds:
